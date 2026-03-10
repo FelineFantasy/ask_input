@@ -1,0 +1,11 @@
+[package]
+name = "ask_input"
+version = "0.1.0"
+edition = "2024"
+authors = ["FelineFantasy"]
+description = "Simple input library"
+license = "MIT"
+repository = "https://github.com/FelineFantasy/ask_input.git"
+
+[lib]
+path = "src/lib.rs"
