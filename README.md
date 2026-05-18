@@ -1,72 +1,58 @@
-# simple_input ⌨️
+# ask_input ⌨️
 
 [![Rust Version](https://img.shields.io/badge/rust-1.70+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-A micro-library for simple keyboard input in Rust. No extra code — just input and get values!
-
-## 📋 Table of Contents
-- [Description](#description)
-- [How to Use](#how-to-use)
-- [Installation](#installation)
-- [Examples](#examples)
-- [Functions](#functions)
-- [Requirements](#requirements)
-- [Author](#author)
+A micro-library for keyboard input in Rust. No extra code — just input and get values!
 
 ## 📝 Description
 
-**simple_input** is a tiny wrapper library over Rust's standard I/O. It allows you to easily get numbers and strings from users without writing verbose boilerplate code every time.
+`ask_input` is a tiny wrapper over Rust's standard I/O. Three functions. No magic. Just input and receive.
 
 ### Features:
-- 🎯 **Minimalism** — Only 3 functions for everything
-- 🔄 **Ready to use** — Parses and returns data immediately
-- 📦 **Lightweight** — Zero extra dependencies
-- 🔌 **Simple integration** — Add to `Cargo.toml` and go
-
-## 🎮 How to Use
-
-1. Add the library to your project
-2. Call the desired input function
-3. Use the received value
+- 🎯 **Minimalism** — Only 3 functions
+- ⚡ **Fast** — Parses and returns immediately
+- 📦 **Lightweight** — Zero dependencies
+- 🔌 **Simple** — Add to Cargo.toml and go
 
 ## ⚙️ Installation
 
-### Option 1: Add to Cargo.toml manually
-
+### Cargo.toml
 ```toml
 [dependencies]
-simple_input = { git = "https://github.com/FelineFantasy/ask_input.git" }
+ask_input = { git = "https://github.com/FelineFantasy/ask_input.git" }
 ```
 
-### Option 2: Clone the repository
-
+### Or clone
 ```bash
 git clone https://github.com/FelineFantasy/ask_input.git
 ```
 
 ## 🧪 Examples
-
 ```rust
-use simple_input;
+use ask_input;
 
-let number = simple_input::get_number::<i32>();
-let text = simple_input::get_string();
+fn main() {
+    let age = ask_input::int_input();
+    println!("You are {} years old", age);
+
+    let price = ask_input::float_input();
+    println!("Price: {} RUB", price);
+
+    let name = ask_input::str_input();
+    println!("Hello, {}!", name);
+}
 ```
 
 ## 📦 Functions
-
-- `get_number<T>()` — Gets a number of type T from input
-- `get_string()` — Gets a string from input
-- `get_number_range<T>(min, max)` — Gets a number within a range
+- `int_input()` — Input an integer (`i32`)
+- `float_input()` — Input a float (`f64`)
+- `str_input()` — Input a string (whitespace trimmed)
 
 ## 📋 Requirements
-
 - Rust 1.70+
-- Cargo
+- Willingness to type
 
 ## 👤 Author
-
-**FelineFantasy**
-
-License: MIT
+- **FelineFantasy**
+- **License**: MIT
