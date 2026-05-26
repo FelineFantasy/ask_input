@@ -1,42 +1,39 @@
+//! # ask_input — простой ввод данных в Rust
+//!
+//! Библиотека делает ввод с клавиатуры таким же удобным, как в Python.
+//! Одна функция на все случаи жизни.
+//!
+//! ## Быстрый старт
+//! ```
+//! use ask_input::input
+//!
+//! let age: i32 = input().unwrap();
+//! println!("Тебе {} лет", age);
+//!
+//! let name: String = input().unwrap();
+//! println!("Привет, {}!", name);
+//! ```
+
 use std::io;
+use std::str::FromStr;
 
-/// Вводит целое число с клавиатуры
+/// Вводит значение с клавиатуры и парсит в нужный тип.
+/// 
+/// Тип определяется автоматически по типу переменной.
 /// 
 /// # Пример
 /// ```
-/// let age = int_input();
+/// let age: i32 = ask_input::input().unwrap();
 /// println!("Тебе {} лет", age);
-/// ```
-pub fn int_input() -> i32 {
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-    input.trim().parse().unwrap()
-}
-
-/// Вводит дробное число с клавиатуры
 /// 
-/// # Пример
-/// ```
-/// let price = float_input();
+/// let name: String = ask_input::input().unwrap();
+/// println!("Привет, {}!", name);
+/// 
+/// let price: f64 = ask_input::input().unwrap();
 /// println!("Цена: {} руб.", price);
 /// ```
-pub fn float_input() -> f64 {
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-    input.trim().parse().unwrap()
-}
-
-/// Вводит строку с клавиатуры
-/// 
-/// Убирает пробелы и перенос строки в начале и конце
-/// 
-/// # Пример
-/// ```
-/// let name = str_input();
-/// println!("Привет, {}!", name);
-/// ```
-pub fn str_input() -> String {
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-    input.trim().to_string()
+pub fn input<T: FromStr>() -> Result<T, Box<dyn std::error::Error>> {
+    let mut buf = String::new();
+    io::stdin().read_line(&mut buf)?;
+    Ok(buf.trim().parse::<T>()?)
 }
