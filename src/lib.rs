@@ -1,3 +1,6 @@
+use std::io;
+use std::str::FromStr;
+
 //! # ask_input — простой ввод данных в Rust
 //!
 //! Библиотека делает ввод с клавиатуры таким же удобным, как в Python.
@@ -5,7 +8,7 @@
 //!
 //! ## Быстрый старт
 //! ```
-//! use ask_input::input
+//! use ask_input::input;
 //!
 //! let age: i32 = input().unwrap();
 //! println!("Тебе {} лет", age);
@@ -13,9 +16,6 @@
 //! let name: String = input().unwrap();
 //! println!("Привет, {}!", name);
 //! ```
-
-use std::io;
-use std::str::FromStr;
 
 /// Вводит значение с клавиатуры и парсит в нужный тип.
 /// 
@@ -32,7 +32,10 @@ use std::str::FromStr;
 /// let price: f64 = ask_input::input().unwrap();
 /// println!("Цена: {} руб.", price);
 /// ```
-pub fn input<T: FromStr>() -> Result<T, Box<dyn std::error::Error>> {
+pub fn input<T: FromStr>() -> Result<T, Box<dyn std::error::Error>>
+where
+    <T as FromStr>::Err: std::error::Error,
+{
     let mut buf = String::new();
     io::stdin().read_line(&mut buf)?;
     Ok(buf.trim().parse::<T>()?)
