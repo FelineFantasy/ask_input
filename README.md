@@ -25,7 +25,7 @@ ask_input = "0.2.0"
 
 ## 🧪 Examples
 
-Basic usage with proper error handling:
+### Basic usage with `expect`
 
 ```rust
 use ask_input::input;
@@ -36,6 +36,38 @@ fn main() {
     let name: String = input().expect("Failed to read name");
     
     println!("Age: {}, Price: {}, Name: {}", age, price, name);
+}
+```
+
+### With `match` for graceful error handling
+
+```rust
+use ask_input::input;
+
+fn main() {
+    println!("Enter your age:");
+    
+    let age: i32 = match input() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Invalid input! Using default age 18.");
+            18
+        }
+    };
+    
+    println!("Your age: {}", age);
+}
+```
+
+### With `unwrap_or` for default values
+
+```rust
+use ask_input::input;
+
+fn main() {
+    // If input fails, use 0.0 as default
+    let price: f64 = input().unwrap_or(0.0);
+    println!("Price: {}", price);
 }
 ```
 
