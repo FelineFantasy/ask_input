@@ -16,7 +16,7 @@ A micro-library for keyboard input in Rust. No extra code — just input and get
 
 ## ⚙️ Installation
 
-Добавьте в ваш `Cargo.toml`:
+Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
