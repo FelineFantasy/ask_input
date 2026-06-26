@@ -12,6 +12,7 @@ A micro-library for keyboard input in Rust. No extra code — just input and get
 ### Features:
 - 🎯 One function for everything
 - 🧠 Smart type detection
+- 🛡️ Automatic stdout flushing to prevent prompt-freezing
 - ⚡ Zero dependencies
 
 ## ⚙️ Installation
@@ -20,7 +21,7 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-ask_input = "0.2.0"
+ask_input = "0.3.0"
 ```
 
 ## 🧪 Examples
@@ -89,6 +90,10 @@ fn main() {
 - `float_input()` → `input::<f64>()`
 - `str_input()` → `input::<String>()`
 - Now returns `Result` instead of panicking
+
+## 🔄 Changelog (v0.2.0 → v0.3.0)
+- Added automatic `io::stdout().flush()` before reading input. This guarantees that `print!` prompts appear on screen instantly, fixing terminal output freezing.
+- Updated all inline documentation to English.
 
 ## 👤 Author
 - **FelineFantasy**
