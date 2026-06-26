@@ -1,41 +1,43 @@
-//! # ask_input — простой ввод данных в Rust
+//! # ask_input — Simple data input in Rust
 //!
-//! Библиотека делает ввод с клавиатуры таким же удобным, как в Python.
-//! Одна функция на все случаи жизни.
+//! This library makes terminal input in Rust as easy and convenient as it is in Python.
+//! One single generic function to handle all your input needs with automatic stdout flushing.
 //!
-//! ## Быстрый старт
+//! ## Quick Start
 //! ```
 //! use ask_input::input;
 //!
 //! let age: i32 = input().unwrap();
-//! println!("Тебе {} лет", age);
+//! println!("You are {} years old", age);
 //!
 //! let name: String = input().unwrap();
-//! println!("Привет, {}!", name);
+//! println!("Hello, {}!", name);
 //! ```
 
-use std::io;
+use std::io::{self, Write};
 use std::str::FromStr;
 
-/// Вводит значение с клавиатуры и парсит в нужный тип.
+/// Reads a line from stdin, flushes stdout automatically, and parses it into the target type.
 /// 
-/// Тип определяется автоматически по типу переменной.
+/// The target type is inferred automatically based on the variable type assignment.
 /// 
-/// # Пример
+/// # Examples
 /// ```
 /// let age: i32 = ask_input::input().unwrap();
-/// println!("Тебе {} лет", age);
+/// println!("Age: {}", age);
 /// 
 /// let name: String = ask_input::input().unwrap();
-/// println!("Привет, {}!", name);
+/// println!("Hello, {}!", name);
 /// 
 /// let price: f64 = ask_input::input().unwrap();
-/// println!("Цена: {} руб.", price);
+/// println!("Price: \${}", price);
 /// ```
 pub fn input<T: FromStr>() -> Result<T, Box<dyn std::error::Error>>
 where
     <T as FromStr>::Err: std::error::Error + 'static,
 {
+    let _ = io::stdout().flush();
+
     let mut buf = String::new();
     io::stdin().read_line(&mut buf)?;
     Ok(buf.trim().parse::<T>()?)
