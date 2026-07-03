@@ -2,6 +2,7 @@
 
 [![Rust Version](https://img.shields.io/badge/rust-1.70+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Crates.io](https://img.shields.io/crates/d/ask_input)](https://crates.io/crates/ask_input)
 [![docs.rs](https://img.shields.io/docsrs/ask_input)](https://docs.rs/ask_input)
 
 A micro-library for keyboard input in Rust. No extra code — just input and get values!
